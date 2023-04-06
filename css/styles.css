@@ -12,6 +12,9 @@
   --border: rgba(142, 143, 153, 1);
   --clients: #8e8f99;
   --footer-hover: rgba(49, 208, 170, 1);
+  --backdrop: rgba(46, 47, 66, 0.4);
+  --modal-background: #fcfcfc;
+  --close: #e7e9fc;
 }
 
 body {
@@ -113,6 +116,9 @@ header {
   line-height: 1.5;
   letter-spacing: 0.02em;
   color: var(--title);
+  transition-property: color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .adress-list {
@@ -125,6 +131,9 @@ header {
   text-decoration: none;
   line-height: 1.5;
   color: var(--primery-text-color);
+  transition-property: color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .contacts:hover,
@@ -134,26 +143,39 @@ header {
   color: var(--hover-color);
 }
 
+.current {
+  position: relative;
+}
+
+.current::after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  content: "";
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--hover-color);
+}
 /* ----------------HERO------------------------ */
 .hero-btn {
   display: block;
   margin: 0 auto;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: 0.04em;
+  border: transparent;
+  padding: 16px 32px;
   background-color: var(--accent-color);
   color: var(--hero-text);
   font-family: "Roboto", sans-serif;
   cursor: pointer;
   border-radius: 4px;
-  border: transparent;
-  padding: 16px 32px;
+  transition-property: background-color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hero-btn:hover,
 .hero-btn:focus {
-  background: var(--hover-color);
+  background-color: var(--hover-color);
 }
 
 .hero {
@@ -302,6 +324,9 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition-property: background-color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .soc-link:hover,
@@ -331,10 +356,16 @@ header {
   border-radius: 4px;
   align-items: center;
   justify-content: center;
+  transition-property: border-color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .customers-icon {
   fill: var(--clients);
+  transition-property: fill;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .customers-link:hover,
@@ -422,6 +453,9 @@ header {
   line-height: 1.5;
   letter-spacing: 0.04em;
   cursor: pointer;
+  transition-property: background-color, color, box-shadow;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .filters-btn:hover,
@@ -466,10 +500,81 @@ header {
 
 .portfolio-link {
   display: block;
+  transition-property: box-shadow;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .portfolio-link:hover,
 .portfolio-link:focus {
   box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08),
     0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
+}
+.text-overlay-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.text-overlay {
+  position: absolute;
+  top: 0;
+  font-size: 16px;
+  color: var(--foother-text);
+  background-color: var(--accent-color);
+  padding: 40px 32px;
+  height: 100%;
+  transform: translateY(100%);
+  transition-property: transform;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: auto;
+}
+
+.portfolio-link:hover .text-overlay,
+.portfolio-link:focus .text-overlay {
+  transform: translateY(0);
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--backdrop);
+  transition: opacity 250ms linear, visibility 250ms linear;
+}
+
+.modal {
+  width: 408px;
+  min-height: 576px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  background-color: var(--modal-background);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  transition: transform 400ms linear;
+}
+
+.backdrop.is-hidden .modal {
+  transform: translate(-100%, 0) scale(0);
+}
+
+.close {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  width: 24px;
+  height: 24px;
+  background-color: var(--close);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+
+.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
