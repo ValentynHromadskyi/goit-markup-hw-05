@@ -145,6 +145,7 @@ header {
 
 .current {
   position: relative;
+  color: var(--hover-color);
 }
 
 .current::after {
@@ -166,6 +167,7 @@ header {
   background-color: var(--accent-color);
   color: var(--hero-text);
   font-family: "Roboto", sans-serif;
+  font-weight: 500;
   cursor: pointer;
   border-radius: 4px;
   transition-property: background-color;
@@ -564,13 +566,26 @@ header {
 
 .close {
   position: absolute;
+  cursor: pointer;
   right: 24px;
   top: 24px;
   width: 24px;
   height: 24px;
+
   background-color: var(--close);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
+}
+
+.close-icon {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.close:hover,
+.close:focus {
+  background-color: var(--hover-color);
+  fill: var(--hero-text);
 }
 
 .is-hidden {
